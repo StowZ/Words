@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.aziz.words.DetailActivity
 import com.aziz.words.MainActivity
 import com.aziz.words.R
+import com.aziz.words.WordListFragment
 
 /**
  * Adapter for the [RecyclerView] in [MainActivity].
@@ -50,11 +51,8 @@ class LetterAdapter :
         val item = list[position]
         holder.button.text = item.toString()
         holder.button.setOnClickListener {
-            val context = holder.view.context
-            val intent = Intent(context, DetailActivity::class.java)
-            intent.putExtra(DetailActivity.LETTER, holder.button.text.toString())
-                    context.startActivity(intent)
-
+            val action = LetterListFragmentDirections.actionLetterListFragmentToWordListFragment(letter = holder.button.text.toString())
+            holder.view.findNavController().navigate(action)
         }
     }
 
